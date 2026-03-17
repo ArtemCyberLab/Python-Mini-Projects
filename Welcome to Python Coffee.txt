@@ -1,0 +1,57 @@
+orders = [
+    ("Espresso", 150),
+    ("Latte", 250),
+    ("Cappuccino", 200),
+    ("Espresso", 150)
+]
+
+cafe_info = {
+    "name": "Python Coffee",
+    "city": "Moscow"
+}
+
+def show_orders(items):
+    print("All orders:")
+    for name, price in items:
+        print(f"{name}: {price} RUB")
+
+def get_total_income(items):
+    total = 0
+    for name, price in items:
+        total += price
+    return total
+
+def get_unique_drinks(items):
+    unique = set()
+    for name, price in items:
+        unique.add(name)
+    return unique
+
+show_orders(orders)
+
+income = get_total_income(orders)
+print(f"\nTotal income: {income}")
+
+menu = get_unique_drinks(orders)
+print(f"Unique drinks: {menu}")
+
+print(f"\nWelcome to {cafe_info['name']}")
+print(f"Location: {cafe_info['city']}")
+
+..............................................
+
+All orders:
+Espresso: 150 RUB
+Latte: 250 RUB
+Cappuccino: 200 RUB
+Espresso: 150 RUB
+
+Total income: 750
+Unique drinks: {'Latte', 'Espresso', 'Cappuccino'}
+
+Welcome to Python Coffee
+Location: Moscow
+
+
+
+
