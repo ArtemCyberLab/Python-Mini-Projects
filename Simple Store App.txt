@@ -1,0 +1,73 @@
+import random
+from datetime import datetime
+
+# 1. Data structures (Dictionary with products)
+# Key - name (str), value - price (int)
+products = {
+    "Bread": 50,
+    "Milk": 90,
+    "Chocolate": 120,
+    "Coffee": 350
+}
+
+# 2. Function for calculation (def and return)
+def calculate_price(item_name, count):
+    if item_name in products:
+        price_per_one = products[item_name]
+        total = price_per_one * count
+        return total
+    else:
+        return 0
+
+# --- MAIN LOGIC ---
+
+# User input (input) and date (datetime)
+name = input("Enter your name: ")
+current_time = datetime.now().strftime("%H:%M")
+print(f"Hello, {name}! The time is {current_time}. Welcome to PythonShop!")
+
+print("\nToday's products:")
+# for loop to display the list
+for item, price in products.items():
+    print(f"- {item}: {price} rub.")
+
+# Product selection
+choice = input("\nWhat would you like to buy? ")
+try:
+    amount = int(input("How many items? "))  # Type casting to int
+except ValueError:
+    amount = 0
+
+# Conditions (if, elif, else)
+total_cost = calculate_price(choice, amount)
+
+if total_cost == 0:
+    print("Sorry, this product is not available or you entered an invalid quantity.")
+else:
+    # Using random library (random discount)
+    luck = random.randint(1, 10)
+    
+    if luck > 7:
+        discount = 0.9  # float (10% discount)
+        total_cost *= discount
+        print(f"🎉 You're lucky! A super discount has been applied. Total to pay: {total_cost} rub.")
+    else:
+        print(f"Total to pay: {total_cost} rub.")
+
+print("Thank you for your purchase!")
+
+=======================================================================================================
+
+Enter your name: DAN
+Hello, DAN! The time is 21:01. Welcome to PythonShop!
+
+Today's products:
+- Bread: 50 rub.
+- Milk: 90 rub.
+- Chocolate: 120 rub.
+- Coffee: 350 rub.
+
+What would you like to buy? Milk
+How many items? 6
+Total to pay: 540 rub.
+Thank you for your purchase!
