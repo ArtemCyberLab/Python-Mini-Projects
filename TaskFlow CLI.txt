@@ -1,0 +1,163 @@
+import json
+import os
+
+FILE_NAME = "tasks.json"
+
+
+# ===== File handling =====
+def load_tasks():
+    if os.path.exists(FILE_NAME):
+        with open(FILE_NAME, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
+
+
+def save_tasks(tasks):
+    with open(FILE_NAME, "w", encoding="utf-8") as f:
+        json.dump(tasks, f, indent=4)
+
+
+# ===== Core functions =====
+def add_task(tasks):
+    title = input("Task: ")
+    category = input("Category: ")
+
+    tasks.append({
+        "title": title,
+        "category": category,
+        "done": False
+    })
+
+    print("✅ Task added")
+
+
+def show_tasks(tasks):
+    if not tasks:
+        print("📭 No tasks found")
+        return
+
+    for i, t in enumerate(tasks):
+        status = "✔" if t["done"] else "❌"
+        print(f"{i}. [{status}] {t['title']} ({t['category']})")
+
+
+def mark_done(tasks):
+    show_tasks(tasks)
+    index = input("Task number: ")
+
+    if index.isdigit():
+        index = int(index)
+        if index < len(tasks):
+            tasks[index]["done"] = True
+            print("✅ Marked as done")
+        else:
+            print("❌ Invalid task number")
+
+
+def delete_task(tasks):
+    show_tasks(tasks)
+    index = input("Delete task number: ")
+
+    if index.isdigit():
+        index = int(index)
+        if index < len(tasks):
+            print("🗑 Deleted:", tasks[index]["title"])
+            tasks.pop(index)
+        else:
+            print("❌ Invalid task number")
+
+
+def filter_tasks(tasks):
+    choice = input("1 - Completed, 2 - Pending: ")
+
+    if choice == "1":
+        result = [t for t in tasks if t["done"]]
+    elif choice == "2":
+        result = [t for t in tasks if not t["done"]]
+    else:
+        print("❌ Invalid choice")
+        return
+
+    for t in result:
+        status = "✔" if t["done"] else "❌"
+        print(f"[{status}] {t['title']}")
+
+
+def search_tasks(tasks):
+    word = input("Search keyword: ").lower()
+
+    for t in tasks:
+        if word in t["title"].lower():
+            status = "✔" if t["done"] else "❌"
+            print(f"[{status}] {t['title']}")
+
+
+# ===== Menu =====
+def main():
+    tasks = load_tasks()
+
+    while True:
+        print("\n1. Add Task")
+        print("2. Show Tasks")
+        print("3. Mark as Done")
+        print("4. Delete Task")
+        print("5. Filter Tasks")
+        print("6. Search Tasks")
+        print("0. Exit")
+
+        choice = input(">> ")
+
+        if choice == "1":
+            add_task(tasks)
+        elif choice == "2":
+            show_tasks(tasks)
+        elif choice == "3":
+            mark_done(tasks)
+        elif choice == "4":
+            delete_task(tasks)
+        elif choice == "5":
+            filter_tasks(tasks)
+        elif choice == "6":
+            search_tasks(tasks)
+        elif choice == "0":
+            save_tasks(tasks)
+            print("💾 Saved. Goodbye!")
+            break
+        else:
+            print("❌ Invalid input")
+
+
+if __name__ == "__main__":
+    main()
+
+..........................................................
+
+
+1. Add Task
+2. Show Tasks
+3. Mark as Done
+4. Delete Task
+5. Filter Tasks
+6. Search Tasks
+0. Exit
+>> 2
+📭 No tasks found
+
+1. Add Task
+2. Show Tasks
+3. Mark as Done
+4. Delete Task
+5. Filter Tasks
+6. Search Tasks
+0. Exit
+>> 6
+Search keyword: 123
+
+1. Add Task
+2. Show Tasks
+3. Mark as Done
+4. Delete Task
+5. Filter Tasks
+6. Search Tasks
+0. Exit
+>> 
