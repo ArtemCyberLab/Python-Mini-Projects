@@ -1,0 +1,37 @@
+FILE = "notes.txt"
+
+# try to read file
+try:
+    f = open(FILE, "r", encoding="utf-8")  # open file for reading
+    content = f.read()  # read all content
+    f.close()  # close file
+
+    print("Current content:")
+    print(content)
+
+except FileNotFoundError:
+    print("File not found. It will be created.")
+    content = ""
+
+# get new text from user
+new_text = input("Enter new text: ")
+
+# try to write file
+try:
+    f = open(FILE, "w", encoding="utf-8")  # open file for writing
+    f.write(content + "\n" + new_text)  # write old + new text
+    f.close()  # close file
+
+    print("Saved successfully!")
+
+except Exception as e:
+    print("Error:", e)
+
+
+.....................................................................
+File not found. It will be created.
+Enter new text: Hello World !
+Saved successfully!
+
+Process finished with exit code 0
+
