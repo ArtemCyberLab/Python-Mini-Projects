@@ -1,0 +1,25 @@
+import os
+from pathlib import Path
+
+# ask user for folder
+path = input("Enter folder path: ")
+
+# ask what extension to search
+ext = input("Enter extension (example: .txt): ")
+
+try:
+    files = os.listdir(path)
+
+    print("\nFound files:")
+
+    for f in files:
+        full_path = Path(path) / f
+
+        if full_path.is_file() and full_path.suffix == ext:
+            print(f)
+
+except FileNotFoundError:
+    print("Folder not found.")
+
+except Exception as e:
+    print("Error:", e)
