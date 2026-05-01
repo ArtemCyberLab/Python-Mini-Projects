@@ -1,0 +1,19 @@
+from collections import defaultdict
+import time
+
+failed_logins = defaultdict(list)
+
+def detect_bruteforce(event):
+    if event["event_type"] == "failed_login":
+        ip = event["source_ip"]
+        now = time.time()
+
+        failed_logins[ip].append(now)
+
+        # Keep only last 60 seconds
+        failed_logins[ip] = [t for t in failed_logins[ip] if now - t < 60]
+
+        if len(failed_logins[ip]) >= 5:
+            return f"[ALERT] Brute-force attack detected from {ip}"
+
+return None
