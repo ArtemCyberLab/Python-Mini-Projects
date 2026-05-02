@@ -1,0 +1,14 @@
+import requests
+
+API_KEY = "your_api_key"
+
+def check_ip(ip):
+    url = f"https://www.virustotal.com/api/v3/ip_addresses/{ip}"
+    headers = {"x-apikey": API_KEY}
+
+    response = requests.get(url, headers=headers)
+    data = response.json()
+
+    malicious = data["data"]["attributes"]["last_analysis_stats"]["malicious"]
+
+    return malicious
