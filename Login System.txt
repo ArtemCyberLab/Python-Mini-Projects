@@ -1,0 +1,21 @@
+correct_login = "admin"
+correct_password = "qwerty123"
+
+attempts = 3
+
+while attempts > 0:
+
+    login = input("Login: ")
+    password = input("Password: ")
+
+    if login == correct_login and password == correct_password:
+        print("Access granted")
+        break
+
+    else:
+        attempts -= 1
+        print("Access denied")
+        print("Attempts left:", attempts)
+
+if attempts == 0:
+    print("Account blocked")
