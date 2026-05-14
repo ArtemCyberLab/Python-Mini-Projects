@@ -1,0 +1,27 @@
+import requests
+import time
+
+sites = [
+    "https://google.com",
+    "https://github.com",
+    "https://youtube.com"
+]
+
+while True:
+    print("\nChecking sites:\n")
+
+    for site in sites:
+        start = time.time()
+
+        try:
+            response = requests.get(site, timeout=5)
+            speed = round(time.time() - start, 2)
+
+            print(f"{site}")
+            print(f"Status: {response.status_code}")
+            print(f"Response time: {speed} sec\n")
+
+        except requests.exceptions.RequestException:
+            print(f"{site} is unavailable\n")
+
+    time.sleep(10)
