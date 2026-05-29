@@ -1,0 +1,14 @@
+file = open("logs.txt", "r")
+
+for line in file:
+
+    if "Failed login" in line:
+        print("[!] Suspicious login:", line)
+
+    if "SQL Injection" in line:
+        print("[!] SQLi detected:", line)
+
+    if "XSS" in line:
+        print("[!] XSS detected:", line)
+
+file.close()
