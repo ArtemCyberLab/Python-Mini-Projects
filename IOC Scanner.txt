@@ -1,0 +1,29 @@
+iocs = [
+    "mimikatz",
+    "nc.exe",
+    "powershell -enc",
+    "malware.exe",
+    "meterpreter"
+]
+
+# Файл для проверки
+filename = input("File to scan: ")
+
+try:
+    with open(filename, "r", encoding="utf-8") as file:
+        content = file.read().lower()
+
+    found = False
+
+    print("\n=== Scan Results ===\n")
+
+    for ioc in iocs:
+        if ioc.lower() in content:
+            print(f"[ALERT] IOC Found: {ioc}")
+            found = True
+
+    if not found:
+        print("[OK] No IOC found.")
+
+except FileNotFoundError:
+    print("[ERROR] File not found.")
