@@ -1,0 +1,34 @@
+def caesar_cipher(text, shift, mode="encrypt"):
+    result = ""
+
+    # Adjust shift for decryption
+    if mode == "decrypt":
+        shift = -shift
+
+    for char in text:
+        # Encrypt/Decrypt uppercase letters
+        if char.isupper():
+            # Standard ASCII shift logic for A-Z
+            result += chr((ord(char) + shift - 65) % 26 + 65)
+        # Encrypt/Decrypt lowercase letters
+        elif char.islower():
+            # Standard ASCII shift logic for a-z
+            result += chr((ord(char) + shift - 97) % 26 + 97)
+        else:
+            # Leave spaces and punctuation as they are
+            result += char
+
+    return result
+
+
+# --- Main Program ---
+print("--- Cybersecurity 101: Caesar Cipher Tool ---")
+choice = input("Type 'encrypt' to secure or 'decrypt' to read: ").lower()
+message = input("Enter your message: ")
+secret_key = int(input("Enter shift number (1-25): "))
+
+if choice in ["encrypt", "decrypt"]:
+    output = caesar_cipher(message, secret_key, choice)
+    print(f"\nYour {choice}ed message is: {output}")
+else:
+    print("Invalid choice! Please restart the program.")
