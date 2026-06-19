@@ -1,0 +1,37 @@
+# A password generator built with functions and lists
+import random
+
+# A list of letters to make the password from
+letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "L", "M", "N"]
+
+
+# Function to generate a password of a specific length
+def make_password(length):
+    # Start with an empty string for the password
+    password = ""
+
+    # Loop as many times as the requested length
+    for i in range(0, length):
+        # Pick one random character from the letters list
+        random_char = random.choice(letters)
+
+        # Add this character to our password string
+        password = password + random_char
+
+    # Give back the complete password
+    return password
+
+
+# Main program starts here
+print("--- Welcome to Password Generator ---")
+
+# Ask the user how long the password should be
+user_length = input("How many characters do you want? ")
+number_length = int(user_length)
+
+# Call our function and save the result
+final_password = make_password(number_length)
+
+# Print the generated password
+print("Your new password is:")
+print(final_password)
