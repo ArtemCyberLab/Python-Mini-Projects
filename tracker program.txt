@@ -1,0 +1,35 @@
+# My simple expense tracker program
+
+# Create an empty list to store all expenses
+my_expenses = []
+
+print("--- Welcome to Expense Tracker ---")
+print("Enter your expenses one by one.")
+print("When you are done, type 0 to stop.")
+
+# Start a loop that runs forever until we stop it
+while True:
+    # Ask user for the money spent
+    user_input = input("Enter price: ")
+    price = int(user_input)
+
+    # If user enters 0, it means they want to stop
+    if price == 0:
+        print("Stopping... calculating your total.")
+        # Exit the while loop
+        break
+
+    # Add the new price to our list
+    my_expenses.append(price)
+    print("Added to the list!")
+
+# Now, let's calculate the total sum
+total_sum = 0
+
+# Loop through our list and add every number to total_sum
+for item in my_expenses:
+    total_sum = total_sum + item
+
+# Show the final result
+print("Your total expenses:")
+print(total_sum)
